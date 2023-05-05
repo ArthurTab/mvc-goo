@@ -16,7 +16,7 @@ class login
         //Chargement / appel du controleur
         // Pas besoin de ça on a l'autoloader : require_once 'mod_accueil/controleur/accueilControleur.php';
         //Il faut bien renseigner TOUT ce chemin à chaque fois car faut pas oublier qu'on part d'index qui est maitre de tout
-        $this->oControleur = new loginControleur($this->parametre);
+        $this->oControleur = new authentificationControleur($this->parametre);
     }
 
     public function choixAction()
