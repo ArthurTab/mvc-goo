@@ -47,8 +47,8 @@ class produitModele extends Modele
             $valeurs->getDesignation(),
             $valeurs->getStock(),
             $valeurs->getDescriptif(),
-            $valeurs->getTarifHT(),
-            $valeurs->getPoidsPiece(),
+            $valeurs->getPrix_unitaire_HT(),
+            $valeurs->getPoids_piece(),
             $valeurs->getQuantite(),
         ]);
         if ($idRequete) {
@@ -74,9 +74,9 @@ class produitModele extends Modele
         $idRequete = $this->executeRequete($sql, [
             $valeurs->getDesignation(),
             $valeurs->getDescriptif(),
-            $valeurs->getTarifHT(),
+            $valeurs->getPrix_unitaire_HT(),
             $valeurs->getStock(),
-            $valeurs->getPoidsPiece(),
+            $valeurs->getPoids_piece(),
             $valeurs->getReference(),
         ]);
         if ($idRequete) {

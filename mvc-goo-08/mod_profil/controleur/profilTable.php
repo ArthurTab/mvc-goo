@@ -14,7 +14,7 @@ class profilTable
     private $telephone = "";
     private $login = "";
     private $motdepasse = "";
-    private $ConfirmMotdepasse = "";
+    private $confirmMotDePasse = "";
     private $total_ht = "";
 
 
@@ -31,7 +31,6 @@ class profilTable
             $this->hydrater($data);
 
         }
-
     }
 
     public function hydrater(array $row)
@@ -152,9 +151,9 @@ class profilTable
     /**
      * @return string
      */
-    public function getConfirmMotdepasse()
+    public function getConfirmMotDePasse()
     {
-        return $this->ConfirmMotdepasse;
+        return $this->confirmMotDePasse;
     }
 
     /**
@@ -257,12 +256,14 @@ class profilTable
         if (empty($motdepasse) || ctype_space(strval($motdepasse))) {
             $this->setAutorisationBD(false);
             self::setMessageErreur("Vous devez saisir un mot de passe.<br>");
-            }
-        if ($motdepasse == $this->getConfirmMotdepasse()){
-            $this->motdepasse = $motdepasse;
-        }else{
-            $this->setAutorisationBD(false);
-            self::setMessageErreur("Vous devez saisir deux mots de passe identiques.<br>");
+        }
+//        if ($motdepasse == $this->getConfirmMotdepasse()){
+//            $this->motdepasse = $motdepasse;
+//        }
+        else {
+            $gauche = "ar30&y%";
+            $droite = "tk!@";
+            $this->motdepasse = hash('ripemd128', "$gauche$motdepasse$droite");
         }
     }
 
@@ -287,11 +288,21 @@ class profilTable
     /**
      * @param string $ConfirmMotdepasse
      */
-    public function setConfirmMotdepasse($ConfirmMotdepasse)
+    public function setConfirmMotDePasse($ConfirmMotDePasse)
     {
-        $this->ConfirmMotdepasse = $ConfirmMotdepasse;
+        if (empty($ConfirmMotDePasse) || ctype_space(strval($ConfirmMotDePasse))) {
+            $this->setAutorisationBD(false);
+            self::setMessageErreur("Vous devez saisir la confirmation du mot de passe.<br>");
+        }
+//        if ($motdepasse == $this->getConfirmMotdepasse()){
+//            $this->motdepasse = $motdepasse;
+//        }
+        else {
+            $gauche = "ar30&y%";
+            $droite = "tk!@";
+            $this->confirmMotDePasse = hash('ripemd128', "$gauche$ConfirmMotDePasse$droite");
+        }
     }
-
 
 
     /**
@@ -303,6 +314,15 @@ class profilTable
     }
 
 
+    public function controlModifMDP()
+    {
+        if ($this->getMotdepasse() != $this->getConfirmMotDePasse())
+        {
+            $this->autorisationBD = false;
+            self::setMessageErreur("Les mots de passe ne sont pas identiques.");
+        }
+
+    }
 }
 
 

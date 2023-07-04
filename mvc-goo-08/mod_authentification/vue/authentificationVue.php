@@ -12,8 +12,11 @@ class AuthentificationVue{
     public function genererAffichage($valeurs){
 
         $this->tpl->assign('titreVue', 'GOURMANDISE SARL');
+
         $this->tpl->assign('action', 'authentifier');
+
         $this->tpl->assign('unvendeur', $valeurs);
+
         $this->tpl->display('mod_authentification/vue/authentificationVue.tpl');
     }
 

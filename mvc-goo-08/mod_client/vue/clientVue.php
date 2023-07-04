@@ -68,7 +68,7 @@ class clientVue
             case 'supprimer':
                 $this->tpl->assign('titrePage', 'Fiche Client : Suppression');
 
-                $this->tpl->assign('readonly', '');
+                $this->tpl->assign('readonly', 'readonly');
 
                 $this->tpl->assign('action', 'supprimer');
 

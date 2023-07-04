@@ -72,14 +72,21 @@ class clientControleur
     public function supprimer()
     {
         $suppClient = new clientTable($this->parametre);
-
-        $this->oModele->delClient($suppClient);
+        if ($this->oModele->controlSupp($suppClient)==false){
+            $this->oModele->delClient($suppClient);
+            $this->lister();
+        }else{
+            $this->oVue->genererAffichageFiche($suppClient);
+        }
     }
 
     public function modifier()
     {
         $modifClient = new clientTable($this->parametre);
-
-        $this->oModele->upClient($modifClient);
+        if ($modifClient->getAutorisationBD()==false){
+            $this->oVue->genererAffichageFiche($modifClient);
+        } else {
+            $this->oModele->upClient($modifClient);
+        }
     }
 }

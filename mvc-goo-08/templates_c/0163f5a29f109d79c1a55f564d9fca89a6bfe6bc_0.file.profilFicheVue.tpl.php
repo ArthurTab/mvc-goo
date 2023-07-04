@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.2.1, created on 2023-05-11 14:06:52
+/* Smarty version 4.2.1, created on 2023-07-04 08:01:39
   from 'C:\laragon\www\gourmandisesarl\mvc-goo-08\mod_profil\vue\profilFicheVue.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.2.1',
-  'unifunc' => 'content_645cf67c4fdfe2_60018919',
+  'unifunc' => 'content_64a3d1e36e72c2_57675548',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '0163f5a29f109d79c1a55f564d9fca89a6bfe6bc' => 
     array (
       0 => 'C:\\laragon\\www\\gourmandisesarl\\mvc-goo-08\\mod_profil\\vue\\profilFicheVue.tpl',
-      1 => 1683813331,
+      1 => 1688457697,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:public/header.tpl' => 1,
   ),
 ),false)) {
-function content_645cf67c4fdfe2_60018919 (Smarty_Internal_Template $_smarty_tpl) {
+function content_64a3d1e36e72c2_57675548 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_checkPlugins(array(0=>array('file'=>'C:\\laragon\\www\\gourmandisesarl\\mvc-goo-08\\include\\libs\\plugins\\modifier.capitalize.php','function'=>'smarty_modifier_capitalize',),));
 ?>
 <!doctype html>
@@ -191,23 +191,6 @@ $_smarty_tpl->_checkPlugins(array(0=>array('file'=>'C:\\laragon\\www\\gourmandis
                                            name="telephone" class="form-control" value="<?php echo $_smarty_tpl->tpl_vars['unProfil']->value->getTelephone();?>
 ">
                                 </div>
-
-                                <div class="form-group">
-                                    <label for="motdepasse">
-                                        Nouveau mot de passe :
-                                    </label>
-                                    <input type="text"
-                                           name="motdepasse" class="form-control" value="">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="ConfirmMotdepasse">
-                                        Confirmer le mot de passe :
-                                    </label>
-                                    <input type="text"
-                                           name="ConfirmMotdepasse" class="form-control" value="">
-                                </div>
-
                             </div>
                             <div class="card-body card-block">
                                 <div class="row">
@@ -224,26 +207,52 @@ $_smarty_tpl->_checkPlugins(array(0=>array('file'=>'C:\\laragon\\www\\gourmandis
                                 </div>
                             </div>
                         </form>
-
-                        </form>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6">
+                <div class="col-md-6">
+
                     <div class="card">
-                        <div class="card-body">
-                            <div class="stat-widget-four">
-                                <div class="stat-icon dib">
-                                    <i class="ti-stats-up text-muted"></i>
+                        <div class="card-header"><strong><?php echo $_smarty_tpl->tpl_vars['titrePage']->value;?>
+</strong></div>
+                        <form action="index.php" method="POST">
+
+                            <!-- PLACER LE FORMULAIRE EN CONSULTATION -->
+                            <input type="hidden" name="gestion" value="profil">
+                            <input type="hidden" name="action" value="modifMDP">
+                            <input type="hidden" name="codev" value="<?php echo $_smarty_tpl->tpl_vars['unProfil']->value->getCodev();?>
+">
+                            <div class="card-body card-block">
+                                <div class="form-group">
+                                    <label for="motdepasse">
+                                        Nouveau mot de passe :
+                                    </label>
+                                    <input type="text"
+                                           name="motdepasse" class="form-control" value="">
                                 </div>
-                                <div class="stat-content">
-                                    <div class="text-left dib">
-                                        <div class="stat-heading">Chiffre d'affaire</div>
-                                        <div class="stat-text">Total: <?php echo $_smarty_tpl->tpl_vars['unProfil']->value->getTotal_Ht();?>
-€</div>
+
+                                <div class="form-group">
+                                    <label for="confirmMotDePasse">
+                                        Confirmer le mot de passe :
+                                    </label>
+                                    <input type="text"
+                                           name="confirmMotDePasse" class="form-control" value="">
+                                </div>
+                            </div>
+                            <div class="card-body card-block">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <input type="button" class="btn btn-danger btn-sm" value="Retour"
+                                               onclick="location.href='index.php?gestion=accueil'">
+                                    </div>
+
+                                    <div class="col-md-6 text-right">
+                                        <input type="submit" class="btn btn-primary btn-sm" value="<?php echo smarty_modifier_capitalize($_smarty_tpl->tpl_vars['action']->value);?>
+"
+                                               name="btn-valider">
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div><!-- .animated -->

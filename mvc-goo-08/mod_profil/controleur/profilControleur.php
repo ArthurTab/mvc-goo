@@ -37,11 +37,27 @@ class profilControleur
 
         } else {
 
-                $this->oModele->upProfil($modifMonProfil);
-
-            }
+            $this->oModele->upProfil($modifMonProfil);
+            $this->oVue->genererAffichageFicheUser($modifMonProfil);
 
 
         }
+    }
+
+
+    public function modifierMDP()
+    {
+        $monProfil = $this->oModele->getProfilUser();
+        $monProfil->setMotdepasse($this->parametre['motdepasse']);
+        $monProfil->setConfirmMotDePasse($this->parametre['confirmMotDePasse']);
+        $monProfil->controlModifMDP();
+        if ($monProfil->getAutorisationBD() == false) {
+            $this->oVue->genererAffichageFicheUser($monProfil);
+        } else {
+            $this->oModele->upMDP($monProfil);
+            $this->oVue->genererAffichageFicheUser($monProfil);
+//          header('location:index.php?gestion=authentification&action=deconnecter&statut=1');
+        }
+    }
 
 }

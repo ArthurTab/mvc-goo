@@ -40,7 +40,16 @@ class profilVue
 
                 $this->tpl->assign('unProfil', $valeurs);
 
-                $this->tpl->assign('CAGlobal', $valeurs);
+//                $this->tpl->assign('CAGlobal', $valeurs);
+                break;
+
+            case 'modifMDP':
+                $this->tpl->assign('titrePage', 'Modification du mot de passe');
+
+                $this->tpl->assign('unProfil', $valeurs);
+
+                $this->tpl->assign('action', 'modifier');
+
                 break;
 
         }

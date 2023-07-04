@@ -146,23 +146,6 @@
                                     <input type="text"
                                            name="telephone" class="form-control" value="{$unProfil->getTelephone()}">
                                 </div>
-
-                                <div class="form-group">
-                                    <label for="motdepasse">
-                                        Nouveau mot de passe :
-                                    </label>
-                                    <input type="text"
-                                           name="motdepasse" class="form-control" value="">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="ConfirmMotdepasse">
-                                        Confirmer le mot de passe :
-                                    </label>
-                                    <input type="text"
-                                           name="ConfirmMotdepasse" class="form-control" value="">
-                                </div>
-
                             </div>
                             <div class="card-body card-block">
                                 <div class="row">
@@ -178,25 +161,49 @@
                                 </div>
                             </div>
                         </form>
-
-                        </form>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6">
+                <div class="col-md-6">
+
                     <div class="card">
-                        <div class="card-body">
-                            <div class="stat-widget-four">
-                                <div class="stat-icon dib">
-                                    <i class="ti-stats-up text-muted"></i>
+                        <div class="card-header"><strong>{$titrePage}</strong></div>
+                        <form action="index.php" method="POST">
+
+                            <!-- PLACER LE FORMULAIRE EN CONSULTATION -->
+                            <input type="hidden" name="gestion" value="profil">
+                            <input type="hidden" name="action" value="modifMDP">
+                            <input type="hidden" name="codev" value="{$unProfil->getCodev()}">
+                            <div class="card-body card-block">
+                                <div class="form-group">
+                                    <label for="motdepasse">
+                                        Nouveau mot de passe :
+                                    </label>
+                                    <input type="text"
+                                           name="motdepasse" class="form-control" value="">
                                 </div>
-                                <div class="stat-content">
-                                    <div class="text-left dib">
-                                        <div class="stat-heading">Chiffre d'affaire</div>
-                                        <div class="stat-text">Total: {$unProfil->getTotal_Ht()}€</div>
+
+                                <div class="form-group">
+                                    <label for="confirmMotDePasse">
+                                        Confirmer le mot de passe :
+                                    </label>
+                                    <input type="text"
+                                           name="confirmMotDePasse" class="form-control" value="">
+                                </div>
+                            </div>
+                            <div class="card-body card-block">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <input type="button" class="btn btn-danger btn-sm" value="Retour"
+                                               onclick="location.href='index.php?gestion=accueil'">
+                                    </div>
+
+                                    <div class="col-md-6 text-right">
+                                        <input type="submit" class="btn btn-primary btn-sm" value="{$action|capitalize}"
+                                               name="btn-valider">
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div><!-- .animated -->

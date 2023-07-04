@@ -1,6 +1,6 @@
 <?php
 
-class profilModele extends Modele
+class ProfilModele extends Modele
 {
     private $parametre = [];
 
@@ -15,14 +15,14 @@ class profilModele extends Modele
     public function getProfilUser()
     {
 
-        $sql = "SELECT SUM(total_ht) AS total_ht, vendeur.codev, vendeur.nom, vendeur.prenom, vendeur.adresse, vendeur.cp, vendeur.ville, vendeur.telephone, vendeur.login, vendeur.motdepasse FROM vendeur, commande WHERE commande.codev = vendeur.codev AND vendeur.codev = ?";
+        $sql = "SELECT vendeur.codev, vendeur.nom, vendeur.prenom, vendeur.adresse, vendeur.cp, vendeur.ville, vendeur.telephone FROM vendeur WHERE vendeur.codev = ?";
         $idRequete = $this->executeRequete($sql, [$_SESSION['codev']]);
         return new profilTable($idRequete->fetch(PDO::FETCH_ASSOC));
 
     }
 
 
-    public function upProfil(profilTable $valeurs)
+    public function upProfil(ProfilTable $valeurs)
     {
         $sql = "UPDATE vendeur SET nom = ?, prenom = ?, adresse = ?, cp = ?, ville = ?, telephone = ?, motdepasse = ? WHERE codev = ?";
         $idRequete = $this->executeRequete($sql, [
@@ -40,7 +40,21 @@ class profilModele extends Modele
         }
     }
 
-    public function CAGlobal(){
+    public function upMDP(ProfilTable $valeurs)
+    {
+        $sql = "UPDATE vendeur SET motdepasse = ? WHERE codev = ?";
+        $idRequete = $this->executeRequete($sql, [
+            $valeurs->getMotdepasse(),
+            $valeurs->getCodev()
+        ]);
+        if ($idRequete) {
+            profilTable::setMessageSucces('Mr/Mme. ' . $valeurs->getPrenom() . ' ' . $valeurs->getNom() . ', votre mot de passe a bien été modifié.');
+        }
+
+    }
+
+    public function CAGlobal()
+    {
         $sql = "SELECT SUM(total_ht) AS total_ht FROM commande WHERE codev = ?";
         $idRequete = $this->executeRequete($sql, [$_SESSION['codev']]);
         return new profilTable($idRequete->fetch(PDO::FETCH_ASSOC));

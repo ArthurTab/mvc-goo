@@ -67,7 +67,7 @@ class clientModele extends Modele
 
     }
 
-    public function upClient(clientTable $valeurs)
+    public function upClient(ClientTable $valeurs)
     {
         $sql = "UPDATE client SET nom = ?, adresse = ?, cp = ?, ville = ?, telephone = ? WHERE codec = ?";
         $idRequete = $this->executeRequete($sql, [
@@ -80,6 +80,17 @@ class clientModele extends Modele
         ]);
         if ($idRequete) {
             clientTable::setMessageSucces('Le client ' . $valeurs->getNom() . ' a été modifié.');
+        }
+    }
+    public function controlSupp(ClientTable $valeurs)
+    {
+        $sql = "SELECT * FROM commande WHERE codec = ?";
+        $idRequete = $this->executeRequete($sql, [$valeurs->getCodec()]);
+        if ($idRequete->rowCount() ==0){
+            return false;
+        } else {
+            clientTable::setMessageErreur("Ce client ne peut être supprimé.");
+            return true;
         }
     }
 }

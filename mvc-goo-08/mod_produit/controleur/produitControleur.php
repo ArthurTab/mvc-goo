@@ -78,7 +78,10 @@ class produitControleur
     public function modifier()
     {
         $modifProduit = new produitTable($this->parametre);
-
-        $this->oModele->upProduit($modifProduit);
+        if ($modifProduit->getAutorisationBD()==false){
+            $this->oVue->genererAffichageFiche($modifProduit);
+        } else {
+            $this->oModele->upProduit($modifProduit);
+        }
     }
 }

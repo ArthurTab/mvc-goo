@@ -34,7 +34,10 @@ class profil
 
                 case 'modifier':
                     $this->oControleur->modifier();
-                    $this->oControleur->form_modifier();
+                    break;
+
+                case 'modifMDP':
+                    $this->oControleur->modifierMDP();
                     break;
 
                 default:

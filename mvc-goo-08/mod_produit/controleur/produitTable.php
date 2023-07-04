@@ -11,7 +11,7 @@ class produitTable
     private $stock = "";
     private $quantite = "";
     private $descriptif = "";
-    private $poids_piece = "";
+    private $poids_piece = 0;
     private $autorisationBD = true;
     private static $messageErreur = "";
     private static $messageSucces = "";
@@ -217,18 +217,13 @@ class produitTable
     {
         $desc = $this->getDescriptif();
         if ($desc == 'G') {
-            if (empty($poids_piece) || ctype_space(strval($poids_piece)) || $poids_piece != 0) {
-                $this->setAutorisationBD(false);
-                self::setMessageErreur("Le poids par piece est obligatoire. Le descriptif étant égal à G, vous devez donc renseigner un poids par piece égal à 0.<br>");
-            } else {
-                $this->poids_piece = $poids_piece;
-            }
+                $this->poids_piece = intval(0);
         } elseif ($desc == 'P') {
             if (empty($poids_piece) || ctype_space(strval($poids_piece)) || $poids_piece == 0) {
                 $this->setAutorisationBD(false);
                 self::setMessageErreur("Le poids par piece est obligatoire. Le descriptif étant sur P, le poids par piece doit être supérieur à 0.<br>");
             } else {
-                $this->poids_piece = $poids_piece;
+                $this->poids_piece = intval($poids_piece);
             }
         } else {
             $this->setAutorisationBD(false);
